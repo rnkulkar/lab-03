@@ -1,8 +1,10 @@
 ---
-title: "Untitled"
-author: "STAT 108"
+title: "Lab 03"
+author: "Rohit Kulkarni"
 date: "1/26/2022"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
