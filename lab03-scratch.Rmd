@@ -35,23 +35,52 @@ The `elmhurst` dataset contains the following variables:
 
 1. Plot a histogram to examine the distribution of `gift_aid`. What is the approximate shape of the distribution? Also note if there are any outliers in the dataset.
 
+The distribution is slightly skewed to the left, with one outlier of gift aid between 30 and 35. 
+
 2. To better understand the distribution of `gift_aid`, we would like calculate measures of center and spread of the distribution. Use the `summarise` function to calculate the appropriate measures of center (mean or median) and spread (standard deviation or IQR) based on the shape of the distribution from Exercise 1. Show the code and output, and state the measures of center and spread in your narrative. *Be sure to report your conclusions for this exercise and the remainder of the lab in dollars.*
+
+The function I used for the summary statistics: summary(elmhurst$gift_aid)
+
+results: 
+  Min: $7,000
+  1st Quartile: $16,250
+  Median: $20,470
+  3rd Quartile: $23,520
+  Max: $32,720
+  IQR: $23,520 - $16,250 = $7270
+
+The median gift aid given by the university is $20,470, with an inter-quartile range of $7,270. There is one one outlier of $32,720.
 
 3. Plot the distribution of `family_income` and calculate the appropriate summary statistics. Describe the distribution of `family_income` (shape, center, and spread, outliers) using the plot and appropriate summary statistics.  
 
+The distribution of family income is skewed to the right with a median of $88,060. The IQR is $73,090 with several outliers with much higher income. 
+
 4. Create a scatterplot to display the relationship between `gift_aid` (response variable) and `family_income` (predictor variable). Use the scatterplot to describe the relationship between the two variables. Be sure the scatterplot includes informative axis labels and title.
+
+Code used to plot scatterplot: 
+
+``` {r eval=FALSE}
+ggplot(data=elmhurst, aes(x=family_income, y=gift_aid) ) + geom_point() + 
+  xlab('Family Income in thousands') + ylab('Gift Aid in thousands') + 
+  ggtitle("Gift Aid by Family Income")
+```
+
+There is a negative correlation between family income and gift aid. The higher a family's income is, the less gift aid they are likely to recieve.
 
 ## Simple Linear Regression
 
 5. Use the `lm` function to fit a simple linear regression model using `family_income` to explain variation in `gift_aid`. Complete the code below to assign your model a name, and use the `tidy` and `kable` functions to neatly display the model output. *Replace X and Y with the appropriate variable names.*
 
 ```{r eval=FALSE}
-_____ <- lm(Y ~ X, data = _____)
-tidy(_____) %>% # output model
-  kable(digits = 3) # format model output
+model <- lm(gift_aid ~ family_income, data = elmhurst)
+tidy(model) %>%
+  kable(digits = 3)
 ```
 
 6. Interpret the slope in the context of the problem.
+
+For every $1000 increase in family income, there is a $43 decrease in the
+gift aid.
 
 7. When we fit a linear regression model, we make assumptions about the underlying relationship between the response and predictor variables. In practice, we can check that the assumptions hold by analyzing the residuals. Over the next few questions, we will examine plots of the residuals to determine if the assumptions are met.
 
