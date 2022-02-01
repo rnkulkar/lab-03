@@ -87,13 +87,20 @@ gift aid.
 Let's begin by calculating the residuals and adding them to the dataset. Fill in the model name in the code below to add residuals to the original dataset using the `resid()` and `mutate()` functions.
 
 ```{r eval=FALSE}
-_____<- _____ %>%
-  mutate(resid = residuals(_____))
+elmhurst <- elmhurst %>%
+  mutate(resid = residuals(model))
 ```
 
 8. One of the assumptions for regression is that there is a linear relationship between the predictor and response variables. To check this assumption, we will examine a scatterplot of the residuals versus the predictor variable. 
 
+
 Create a scatterplot with the predictor variable on the *x* axis and residuals on the *y* axis. Be sure to include an informative title and properly label the axes. 
+
+```{r eval=FALSE}
+ggplot(data=elmhurst, aes(x=family_income, y=resid) ) + geom_point() + 
+  xlab('Family Income in thousands') + ylab('Residuals') + 
+  ggtitle("Residuals of LR on Family Income and Gift Aid")
+```
 
 9. Examine the plot from the previous question to assess the linearity condition.  
 
@@ -102,16 +109,28 @@ Create a scatterplot with the predictor variable on the *x* axis and residuals o
 
 Based on this, is the linearity condition is satisfied? Briefly explain your reasoning. 
 
+The linearity condition is satisfied because the residual plot has no discernible shape.
+
 10. Recall that when we fit a regression model, we assume for any given value of $x$, the $y$ values follow the Normal distribution with mean $\beta_0 + \beta_1 x$ and variance $\sigma^2$. We will look at two sets of plots to check that this assumption holds.
 
     We begin by checking the constant variance assumption, i.e that the variance of $y$ is approximately equal for each value of $x$. To check this, we will use the scatterplot of the residuals versus the predictor variable $x$. Ideally, as we move from left to right, the spread of the $y$'s will be approximately equal, i.e. there is no "fan" pattern.
 
     Using the scatterplot from Exercise 8 , is the constant variance assumption satisfied? Briefly explain your reasoning. *Note: You don't need to know the value of $\sigma^2$ to answer this question.*
+    
+    The constant variance assumption is met because the spread of the residuals
+    is fairly constant at all levels of family income.
 
 
 11. Next, we will assess with Normality assumption, i.e. that the distribution of the $y$ values is Normal at every value of $x$. In practice, it is impossible to check the distribution of $y$ at every possible value of $x$, so we can check whether the assumption is satisfied by looking at the overall distribution of the residuals. The assumption is satisfied if the distribution of residuals is approximately Normal, i.e. unimodal and symmetric.
 
     Make a histogram of the residuals. Based on the histogram, is the Normality assumption satisfied? Briefly explain your reasoning. 
+
+``` {r eval=FALSE}
+hist(elmhurst$resid)
+```
+
+The Normality assumption is satisfied because the histogram of residuals appears to be
+somewhat normal. 
 
 12. The final assumption is that the observations are independent, i.e. one observation does not affect another. We can typically make an assessment about this assumption using a description of the data. Do you think the independence assumption is satisfied? Briefly explain your reasoning. 
 
