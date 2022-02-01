@@ -30,3 +30,5 @@ ggplot(data=elmhurst, aes(x=family_income, y=resid) ) + geom_point() +
   ggtitle("Residuals of LR on Family Income and Gift Aid")
 
 hist(elmhurst$resid)
+
+summary(model)$r.squared

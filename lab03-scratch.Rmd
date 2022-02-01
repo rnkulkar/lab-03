@@ -134,13 +134,33 @@ somewhat normal.
 
 12. The final assumption is that the observations are independent, i.e. one observation does not affect another. We can typically make an assessment about this assumption using a description of the data. Do you think the independence assumption is satisfied? Briefly explain your reasoning. 
 
+I believe that the independence assumption is satisfied because the gift aid that one
+family receives should not inherently affect the aid that another family with a different
+income level should receive. 
+
 ## Using the Model
 
 13. Calculate $R^2$ for this model and interpret it in the context of the data.
 
+code used to calculate $R^2$: 
+
+``` {r eval=FALSE}
+summary(model)$r.squared
+```
+
+The value of $R^2$ according to the model is 0.2485, which means that 24.85% of the variation in the gift aid can be explained by the family income. 
 
 14. Suppose a high school senior is considering Elmhurst College, and she would like to use your regression model to estimate how much gift aid she can expect to receive. Her family income is $90,000. Based on your model, about how much gift aid should she expect to receive? Show the code or calculations you use to get the prediction. 
 
+gift_aid = -0.043 * family_income + $24,319
+         = -0.043 * $90,000 + $24, 319
+         = $20,449
+
+She should expect to receive $20,449 in gift aid based on the model.
+
 15. Another high school senior is considering Elmhurst College, and her family income is about $310,000. Do you think it would be wise to use your model calculate the predicted gift aid for this student?  Briefly explain your reasoning. 
+
+It would not be wise to use my model to calculate her predicted aid because her family
+income is a relative outlier compared to the other family incomes, so the prediction would have a low likelihood of being accurate.
 
 *You're done and ready to submit your work! Knit, commit, and push all remaining changes. You can use the commit message "Done with Lab 2!", and make sure you have pushed all the files to GitHub (your Git pane in RStudio should be empty) and that <u>all</u> documents are updated in your repo on GitHub. Then submit the assignment on Gradescope following the instructions below.*
